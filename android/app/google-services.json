@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "506429399044",
+    "project_id": "sispaz",
+    "storage_bucket": "sispaz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506429399044:android:7083c88c325b3246e91551",
+        "android_client_info": {
+          "package_name": "com.example.aplicativo_pdm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuNuKzo2W7PNDd_kmZbqRDmy6tW4ZB2go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

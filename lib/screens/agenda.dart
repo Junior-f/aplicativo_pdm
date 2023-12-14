@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Agenda extends StatelessWidget {
@@ -91,24 +92,6 @@ class Agenda extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          const Spacer(),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromRGBO(0, 0, 255, 1),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-            child: const Text(
-              'Adicionar',
-              style: TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 1),
-                fontFamily: 'inter',
-                fontSize: 16,
-              ),
-            ),
           ),
         ],
       ),
@@ -270,25 +253,46 @@ class Agenda extends StatelessWidget {
   }
 
   Widget _buildCard({required double width, required double height}) {
+    return FutureBuilder(
+      future: FirebaseFirestore.instance.collection('pessoas').limit(3).get(),
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Erro ao carregar dados do Firebase: ${snapshot.error}');
+        } else {
+          List<Widget> cards = [];
+          int count = 0;
+
+          for (QueryDocumentSnapshot document in snapshot.data!.docs) {
+            if (count < 3) {
+              String nome = document['nome'];
+              cards.add(_buildCardItem(nome: nome));
+              count++;
+            } else {
+              break;
+            }
+          }
+          return Column(children: cards);
+        }
+      },
+    );
+  }
+
+  Widget _buildCardItem({required String nome}) {
     return Container(
-      width: width,
-      height: height,
+      width: 242.0,
+      height: 100.0,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(217, 217, 217, 1),
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Milena",
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          ),
-        ],
+      child: Center(
+        child: Text(
+          nome,
+          style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
 }
-
-class CustomImageView {}

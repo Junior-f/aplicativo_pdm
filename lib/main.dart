@@ -1,18 +1,15 @@
-import 'package:aplicativo_pdm/routes/routes.dart';
-import 'package:aplicativo_pdm/screens/login.dart';
+import 'package:aplicativo_pdm/screens/checagem.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: const Login(),
-      routes: routes,
-    ),
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
-}
-
-void navegarParaTela(BuildContext context, String rota) {
-  Navigator.pushNamed(context, rota);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,9 +17,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'aplicativo_pdm',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Checagem(),
     );
   }
 }
