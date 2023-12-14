@@ -127,8 +127,7 @@ class _VersiculosState extends State<Versiculos> {
                 ElevatedButton(
                   onPressed: versiculoAnterior,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        const Color.fromRGBO(0, 0, 255, 1), // Fundo azul
+                    backgroundColor: const Color.fromRGBO(0, 0, 255, 1),
                   ),
                   child: const Text(
                     'Anterior',
@@ -140,8 +139,7 @@ class _VersiculosState extends State<Versiculos> {
                 ElevatedButton(
                   onPressed: proximoVersiculo,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        const Color.fromRGBO(0, 0, 255, 1), // Fundo azul
+                    backgroundColor: const Color.fromRGBO(0, 0, 255, 1),
                   ),
                   child: const Text(
                     'Próximo',
